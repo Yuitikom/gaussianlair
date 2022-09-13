@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Profile</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="{% url 'home' %}" class="logo">Home</a>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+						<!-- Blockquote -->
+									<h2>Profile</h2>
+									<form method="post" enctype="multipart/form-data">
+											{% csrf_token %}
+										<div class="row gtr-uniform">
+											<div class="col-6 col-12-xsmall">
+												<b>Name:</b>
+											   {{ user_form.first_name}}
+											</div>
+											<div class="col-6 col-12-xsmall">
+												<b>Last Name:</b>
+												{{ user_form.last_name}}
+											</div>
+											<div class="col-12">
+												<b>Bio:</b>
+												{{ profile_form.bio }}
+											</div>
+											<div class="col-12">
+												<b>Ocupation:</b>
+												{{ profile_form.ocupation }}
+											</div>
+												<div class="col-6 col-12-xsmall">
+													<b>GitHub:</b>
+												{{ profile_form.github_url}}
+											</div>	<div class="col-6 col-12-xsmall">
+												<b>Twitter:</b>
+												{{ profile_form.twitter_url}}
+											</div>	<div class="col-6 col-12-xsmall">
+												<b>Facebook:</b>
+												{{ profile_form.facebook_url  }}
+											</div>	<div class="col-6 col-12-xsmall">
+												<b>Instagram:</b>
+												{{ profile_form.instagram_url  }}
+										</div>
+											<div>
+											<b>Upload new profile picture: </b>
+											<div>
+												{{profile_form.picture}}
+											</div>
+											<div class="col-12">
+                                                <a></a></p>
+												<ul class="actions">
+													<li><input type="submit" value="Edit" class="primary" /></li>
+													<li><input type="reset" value="Reset" /></li>
+												</ul>
+											</div>
+									</form>
+						  <a href="{% url 'changepassword' %}">Change Password</a></p>
+					</div>
+				</div>
+
+				<!-- Copyright -->
+					<div id="copyright">
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %} "></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>

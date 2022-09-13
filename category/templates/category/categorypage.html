@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>{{category_name | title}}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static '/css/noscript.css' %}" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>Gaussian<br />
+						Lair</h1>
+						<p>Mathematician, Physics, Literature and more.</a><br />
+						created by: <a href="https://www.youtube.com/channel/UCVZqF3KG_w59V7_ftsMijLA">Matemático Autodidata</a></p>
+						<ul class="actions">
+                        <li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+					</div>
+
+					<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="{% url 'home' %}">Home</a></li>
+							<li><a href="{% url 'about' %}">About</a></li>
+							<li class="active"><a href="{% url 'categories' %}">Categories</a></li>
+							{% if request.user.is_authenticated %}
+							<li><a href="{% url 'createpost' %}">Create Post</a></li>
+							{% endif %}
+						</ul>
+						<ul class="icons">
+							<li><a href="https://github.com/Yuitikom" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+						{% if request.user.is_authenticated %}
+						<ul class="actions">
+										<li><a href="{%url 'logout' %}" class="button primary">Sign Out</a></li>
+						</ul>
+						{% endif %}
+						<ul>
+						{% if request.user.is_authenticated %}
+						<ul class="actions">
+										<li><a href="{%url 'editprofile' user.id %}" class="button primary">Edit Profile</a></li>
+						</ul>
+						{% endif %}
+						{% if not request.user.is_authenticated %}
+						<ul class="actions">
+										<li><a href="{%url 'login' %}" class="button primary">Login</a></li>
+						</ul>
+						{% endif %}
+
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						{% if request.user.is_authenticated %}
+									<ul class="actions">
+												<li><a href="{% url 'editcategory' category_name category_name.pk %}" class="button primary">Edit Category</a></li>
+												<li><a href="{% url 'deletecategory' category_name category_name.pk %}" class="button primary">Delete Category</a></li>
+							</ul>
+									</ul>
+						{% endif %}
+						<div><h2>Category of {{category_name}}:</h2></div>
+
+								{% if not cat_obj %}
+								<h4>No post with this category yet.</h4>
+									</div>
+								{% endif %}
+						<!-- Posts -->
+							{% if cat_obj %}
+							<section id="posts" class="posts">
+									{% for post in cat_obj %}
+										<article>
+											<header>
+												<span class="date">{{post.date}}</span>
+												<h2><a href="{% url 'postview' post.pk %}">{{post.title}}</a></h2>
+											</header>
+											{% if post.image %}
+											<a href="{% url 'postview' post.pk %}" class="image fit"><img src="{{ post.image.url }}" alt="" /></a>
+											{% endif %}
+											<p>{{post.subtitle}}</p>
+											<ul class="actions special">
+												<li><a href="{% url 'postview' post.pk %}" class="button">Read More</a></li>
+											</ul>
+										</article>
+									{% endfor %}
+							</section>
+							{% endif %}
+
+						<!-- Footer -->
+							<footer>
+								<div class="pagination">
+									{% if cat_obj.has_previous %}
+									<a href="?page={{cat_obj.previous_page_number}}" class="previous">Previous</a>
+									{% endif %}
+
+									{% if cat_obj.has_other_pages%}
+										{% for pages in cat_obj.paginator.page_range %}
+										<a href="?page={{pages}}" class="page">{{pages}}</a>
+										{% endfor %}
+									{% endif %}
+
+									{% if cat_obj.has_next %}
+									<a href="?page={{cat_obj.next_page_number}}" class="next">Next</a>
+									{% endif %}
+								</div>
+							</footer>
+			</div>
+				<!-- Copyright -->
+					<div id="copyright">
+					</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+			<script>document.getElementById('main').scrollIntoView()</script>
+	</body>
+</html>

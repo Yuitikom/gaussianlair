@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>{{posts.title}}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+					<!-- Header -->
+					<header id="header">
+						<a href="{% url 'home' %}" class="logo">Home</a>
+					</header>
+
+				<!-- Main -->
+				<div id="main">
+					{% if request.user.is_authenticated %}
+						{% if user.id == posts.author.id %}
+						<ul class="actions">
+							<li><a href="{%url 'editpost' posts.pk %}" class="button primary">Edit Post</a></li>
+							<li><a href="{%url 'deletepost' posts.pk %}" class="button primary">Delete Post</a></li>
+							</ul>
+						{% endif %}
+					{% endif %}
+
+					<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<span class="date">{{posts.date}}</span>
+									<h1>{{posts.title}}</h1>
+									<p>{{posts.subtitle}}</p>
+									<p>by: {{user.first_name}} {{user.last_name}}</p>
+								</header>
+								{%  if posts.image %}
+								<div class="image main"><img src="{{ posts.image.url }}" alt="" />   <sup>{{ posts.image_font}}</sup>
+								</div>
+								{% endif %}
+								<p>{{posts.content | linebreaks}} </p>
+							</section>
+
+						<!-- Lists -->
+					<div>
+									<h2>References</h2>
+									<div class="row">
+										<div class="col-6 col-12-small">
+											<ul>
+												<li>{{ posts.references  | linebreaks }}</li>
+											</ul>
+									</div>
+						</div>
+					</div>
+
+					<div class="box">
+							{% for i in profile_logged %}
+								{% for x in user_logged %}
+							<div class="box">
+								<div>
+								<p><span class="image left"><img src="{{i.picture.url}}" alt=""</p>
+								<header>
+										<h4>{{x.first_name}} {{x.last_name}}</h4>
+										<p>{{i.ocupation}}</p>
+									</header>
+										{{i.bio}}
+						</div>
+								{% if i.github_url %}
+								<a href="{{ i.github_url }}" class="icon brands alt fa-github"><span class="label">Github</span></a>
+								{% endif %}
+								{% if i.twitter_url %}
+								<a href="{{ i.twitter_url }}" class="icon brands alt fa-twitter"><span class="label">Twitter</a>
+								{% endif %}
+								{% if i.facebook_url %}
+								<a href="{{ i.facebook_url }}" class="icon brands alt fa-facebook-f"><span class="label">Facebook</a>
+								{% endif %}
+								{% if i.instagram_url %}
+								<a href="{{ i.instagram_url }}" class="icon brands alt fa-instagram"><span class="label">Instagram</a>
+								{% endif %}
+								{% endfor %}
+							{% endfor %}
+						</div>
+					</div>
+
+				<!-- Copyright -->
+					<div id="copyright">
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %} "></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>
