@@ -70,23 +70,25 @@
 				<!-- Main -->
 					<div id="main">
 						<!-- Featured Post -->
-						{% for post in post_obj %}
-								{% if post.feature %}
-							<article class="post featured">
-									<header class="major">
-										<span class="date">{{post.date}}</span>
-										<h2><a href="{% url 'postview' post.id %}">{{post.title}}</a></h2>
-										<p>{{post.subtitle}} </p>
-									</header>
-									{% if post.image %}
-									<a href="{% url 'postview' post.id %}" class="image main"><img src="{{post.image.url}}" alt="" /></a>
+						{% if paginator.page(1) %}
+							{% for post in post_obj %}
+									{% if post.feature %}
+								<article class="post featured">
+										<header class="major">
+											<span class="date">{{post.date}}</span>
+											<h2><a href="{% url 'postview' post.id %}">{{post.title}}</a></h2>
+											<p>{{post.subtitle}} </p>
+										</header>
+										{% if post.image %}
+										<a href="{% url 'postview' post.id %}" class="image main"><img src="{{post.image.url}}" alt="" /></a>
+										{% endif %}
+										<ul class="actions special">
+											<li><a href="{% url 'postview' post.id %}" class="button large">Read More</a></li>
+										</ul>
+								</article>
 									{% endif %}
-									<ul class="actions special">
-										<li><a href="{% url 'postview' post.id %}" class="button large">Read More</a></li>
-									</ul>
-							</article>
-								{% endif %}
-						{% endfor %}
+							{% endfor %}
+						{% endif %}
 
 						<!-- Posts -->
 						<div class="container">
