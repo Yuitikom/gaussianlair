@@ -30,7 +30,6 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
 
-
 class Post(models.Model):
     title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255, blank = True)
@@ -46,7 +45,12 @@ class Post(models.Model):
         (True, 'Yes'),
         (False, 'No'),
     )
-    feature = models.BooleanField(max_length = 20,choices =FEATURE_CHOICES,default = False)
+    feature = models.BooleanField(max_length=20, choices=FEATURE_CHOICES, default=False)
+
+    def featurecheck(self):
+        self.objects.all().update(feature=False)
+        self.feature = True
+        return self.save()
 
     class Meta:
         ordering = ['-date']
