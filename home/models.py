@@ -48,7 +48,7 @@ class Post(models.Model):
     feature = models.BooleanField(max_length=20, choices=FEATURE_CHOICES, default=False)
 
     def save(self, *args, **kwargs):
-        if self.feature == True:
+        if self.feature == 'Yes':
             Post.objects.filter(feature=True).update(feature=False)
         super().save(*args, **kwargs)
 
