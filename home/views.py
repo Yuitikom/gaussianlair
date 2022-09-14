@@ -11,9 +11,10 @@ from django.contrib.auth.models import User
 def home(request):
     posts = Post.objects.all()
     paginator = Paginator(posts, 4)
+    page_feature = paginator.page(1)
     page_number = request.GET.get('page', 1)
     post_obj = paginator.get_page(page_number)
-    return render(request, 'home/index.html', {'post_obj': post_obj})
+    return render(request, 'home/index.html', {'post_obj': post_obj, 'page_feature': page_feature})
 
 
 def postpage(request,post_id):

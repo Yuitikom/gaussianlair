@@ -70,7 +70,7 @@
 				<!-- Main -->
 					<div id="main">
 						<!-- Featured Post -->
-						{% if paginator.page(1) %}
+						{% if page_feature %}
 							{% for post in post_obj %}
 									{% if post.feature %}
 								<article class="post featured">
