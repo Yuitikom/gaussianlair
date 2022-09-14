@@ -47,10 +47,10 @@ class Post(models.Model):
     )
     feature = models.BooleanField(max_length=20, choices=FEATURE_CHOICES, default=False)
 
-    def featurecheck(self):
-        self.objects.all().update(feature=False)
-        self.feature = True
-        return self.save()
+    def save(self, *args, **kwargs):
+        if self.feature == True:
+            Post.objects.filter(feature=True).update(feature=False)
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-date']

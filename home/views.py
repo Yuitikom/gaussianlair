@@ -29,7 +29,7 @@ def postpage(request,post_id):
 class AddPost(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'home/createpostpage.html'
-    fields = ('title', 'subtitle', 'category','content', 'image','image_font', 'references',)
+    fields = ('title', 'subtitle', 'category','content', 'image','image_font', 'references', 'feature')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -39,7 +39,7 @@ class AddPost(LoginRequiredMixin, CreateView):
 class UpdatePost(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'home/editpostpage.html'
-    fields = ('title', 'subtitle',  'category', 'content', 'image','image_font', 'references')
+    fields = ('title', 'subtitle',  'category', 'content', 'image','image_font', 'references', 'feature')
 
 
 class DeletePost(LoginRequiredMixin, DeleteView):
