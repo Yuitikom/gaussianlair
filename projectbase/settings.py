@@ -26,7 +26,7 @@ load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -134,6 +134,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 # Cloudinary
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 
 
@@ -141,7 +142,9 @@ CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_ROOT = 'staticfiles'
+
 STATIC_URL = '/static/'
+
 STATICFILES_URL = [
     BASE_DIR / '/home/statics'
 ]
@@ -149,6 +152,7 @@ STATICFILES_URL = [
 # Media files
 
 MEDIA_ROOT = '/media/'
+
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
@@ -158,7 +162,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Security
 CSRF_COOKIE_SECURE = True
+
 SESSION_COOKIE_SECURE = True
+
 SECURE_SSL_REDIRECT = True
+
 SECURE_REFERRER_POLICY = "strict-origin"
+
 SECURE_BROWSER_XSS_FILTER = True
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

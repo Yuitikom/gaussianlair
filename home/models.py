@@ -34,13 +34,13 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255, blank = True)
     category = models.ForeignKey(Category,default= "", on_delete=models.PROTECT, blank=False, null=False )
-    content = models.TextField(max_length=2500)
+    content = models.TextField(max_length=10000)
     date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE,)
     objects = models.Manager()
     image = ResizedImageField(size=[984, 616], crop=['top','left','right'], upload_to='images/post_images')
     image_font = models.CharField(max_length=255, blank=True)
-    references = models.TextField(max_length=2500, blank=True)
+    references = models.TextField(max_length=5000, blank=True)
     FEATURE_CHOICES = (
         (True, 'Yes'),
         (False, 'No'),
